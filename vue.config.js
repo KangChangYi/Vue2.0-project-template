@@ -53,7 +53,9 @@ module.exports = {
         extract: false, // 提取 CSS 至一个文件，开发环境下开启将使 CSS 热重载无效
         sourceMap: false,
         loaderOptions: { // 向 CSS loader 传递选项
-            sass: {},
+            sass: {
+                data: `@import "@/styles/common.scss";@import "@/styles/variables.scss";`
+            }
         },
     },
     devServer: {
