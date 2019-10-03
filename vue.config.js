@@ -68,6 +68,9 @@ module.exports = {
                 ws: false,
                 changeOrigin: true, // 本地起一个虚拟服务器代理请求（跨域）
                 secure: false,
+                pathRewrite: {
+                    [`^/api`]: ''
+                }
             },
         },
     },

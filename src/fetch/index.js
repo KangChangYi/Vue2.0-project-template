@@ -1,7 +1,4 @@
 import axios from 'axios'
-// import router from '../router/index'
-// import { Message } from 'element-ui'
-// import store from '@/store/index'
 import Qs from 'qs'
 
 // TODO 不同环境 api 地址切换
@@ -54,12 +51,6 @@ service.interceptors.response.use(
     // 否则抛出错误
         if (response.status === 200) {
             // 接下去的错误统一处理
-            if (response.data.code !== 0 && response.data.code !== 2) {
-                // Message({
-                //     message: response.data.msg,
-                //     type: 'error'
-                // })
-            }
             return Promise.resolve(response)
         } else {
             return Promise.reject(response)
@@ -71,55 +62,19 @@ service.interceptors.response.use(
         if (error.response.status) {
             switch (error.response.status) {
             // 401: 未登录
-            // 未登录则跳转登录页面，并携带当前页面的路径
-            // 在登录成功后返回当前页面，这一步需要在登录页操作
             case 401:
                 // TODO 统一报错处理、登陆过期重定向
-                // if (router.currentRoute.path !== '/login') {
-                //     router.replace({
-                //         path: '/login',
-                //         query: {
-                //             redirect: router.currentRoute.fullPath
-                //         }
-                //     })
-                // }
-                // store.dispatch('user/clear')
                 break
-                // 403 token过期
+            // 403 token过期
             case 403:
                 // TODO 统一报错处理、登陆过期重定向
-                // Message({
-                //     message: '登录过期，请重新登录',
-                //     type: 'error'
-                // })
-                // 清除token
-                // store.dispatch('user/logout')
-                // 跳转登录页面，并将要浏览的页面fullPath传过去，登录成功后跳转需要访问的页面
-                // setTimeout(() => {
-                //     router.replace({
-                //         path: '/login',
-                //         query: {
-                //             redirect: router.currentRoute.fullPath
-                //         }
-                //     })
-                // }, 1000)
                 break
-                // 403 token过期
+            // 403 token过期
             case 404:
                 // TODO 统一报错处理
-                // Message({
-                //     message: '网络请求不存在',
-                //     type: 'error',
-                //     duration: 5 * 1000
-                // })
                 break
             default:
                 // TODO 统一报错处理
-                // Message({
-                //     message: error.response.data.message || error.response.data.msg,
-                //     type: 'error',
-                //     duration: 5 * 1000
-                // })
             }
             return Promise.reject(error.response)
         }
